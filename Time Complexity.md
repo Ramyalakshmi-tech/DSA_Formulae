@@ -1,3 +1,3 @@
-**Arrays.sort(arr) - nlogn**
+**Arrays.sort(arr) - O(nlogn)**
 
-**HashMap,HashSet takes o(1) to search**
+**HashMap,HashSet takes O(1) to search**
