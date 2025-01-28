@@ -8,3 +8,10 @@
 **int start=(int)Math.pow(10,n-1);**
 
 **int end=(int)(Math.pow(10,n)-1);**
+## How to convert a number into Binary String ##
+**String Binary=Integer.toBinaryString(number)   ---TimeComplexity-O(logn) SpaceComplexity-O(logn)**
+## n-digit binary Number
+**int start=0;
+int end=(int)Math.pow(2,n)-1;**
+
+
