@@ -30,7 +30,6 @@ int end=(int)Math.pow(2,n)-1;**
 ## Heap ##
 **PriorityQueue<int[]> minHeap=new PriorityQueue<>((a,b)->
 {if(a[1]!=b[1]) return Integer.compare(b[1],a[1]);
-
 else return Integer.Compare(a[0],b[0]);
 } );**
 
