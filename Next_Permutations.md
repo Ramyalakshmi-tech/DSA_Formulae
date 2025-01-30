@@ -20,7 +20,7 @@ arr[2] = 5 > arr[1] = 2 ✅ (Found j = 2)
 
 Choose arr[3] = 3 as it's the smallest valid swap.
 
-## Step 3: Swap arr[i] and arr[j]
+**Step 3: Swap arr[i] and arr[j]**
 
 Swap arr[1] and arr[3]
 
@@ -28,7 +28,7 @@ Before Swap: [4, 2, 5, 3, 1]
 
 After Swap: [4, 3, 5, 2, 1]
 
-Step 4: Reverse the subarray after i
+## Step 4: Reverse the subarray after i
 
 Reverse [5, 2, 1] → [1, 2, 5]
 
