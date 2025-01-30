@@ -1,4 +1,4 @@
-Let's dry-run next permutation for arr = [4, 2, 5, 3, 1] step by step.
+##Let's dry-run next permutation for arr = [4, 2, 5, 3, 1] step by step.
 
 Step 1: Find the first decreasing element from the right
 Start from the right:
