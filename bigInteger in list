@@ -1,0 +1,23 @@
+https://www.geeksforgeeks.org/problems/factorials-of-large-numbers2508/1
+
+import java.math.BigInteger;
+
+class Solution {
+    public static ArrayList<Integer> factorial(int n) {
+        BigInteger ans = facRecur(BigInteger.valueOf(n));
+        ArrayList<Integer> list = new ArrayList<>();
+
+        while (!ans.equals(BigInteger.ZERO)) {
+            list.add(ans.mod(BigInteger.TEN).intValue()); // Extract last digit
+            ans = ans.divide(BigInteger.TEN); // Remove last digit
+        }
+        
+        Collections.reverse(list);
+        return list;
+    }
+
+    public static BigInteger facRecur(BigInteger n) {
+        if (n.equals(BigInteger.ONE)) return BigInteger.ONE;
+        return n.multiply(facRecur(n.subtract(BigInteger.ONE)));
+    }
+}
