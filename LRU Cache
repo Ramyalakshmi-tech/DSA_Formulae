@@ -113,3 +113,69 @@ class LRUCache {
 }
 
 //Hashmap to reduce searching
+import java.util.*;
+
+class LRUCache {
+    class Pair {
+        int key, value;
+        public Pair(int key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
+    private Pair[] arr; // Array to store key-value pairs
+    private Map<Integer, Integer> map; // HashMap to store key → index
+    private int capacity, size;
+
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        this.size = 0;
+        this.arr = new Pair[capacity];
+        this.map = new HashMap<>();
+    }
+
+    public int get(int key) {
+        if (!map.containsKey(key)) return -1; // Key not found
+
+        int index = map.get(key);
+        Pair temp = arr[index];
+
+        // Shift elements to move accessed key to the front
+        for (int i = index; i > 0; i--) {
+            arr[i] = arr[i - 1];
+            map.put(arr[i].key, i); // Update index in map
+        }
+        arr[0] = temp;
+        map.put(key, 0); // Update key index
+
+        return temp.value;
+    }
+
+    public void put(int key, int value) {
+        if (map.containsKey(key)) {
+            int index = map.get(key);
+            arr[index].value = value; // Update value
+            get(key); // Move to front using existing logic
+            return;
+        }
+
+        // If cache is full, remove the least recently used element
+        if (size == capacity) {
+            int removedKey = arr[size - 1].key;
+            map.remove(removedKey);
+            size--;
+        }
+
+        // Shift elements to make space at front
+        for (int i = size; i > 0; i--) {
+            arr[i] = arr[i - 1];
+            map.put(arr[i].key, i); // Update indices in map
+        }
+
+        // Insert new key-value pair at the front
+        arr[0] = new Pair(key, value);
+        map.put(key, 0);
+        size++;
+    }
+}
