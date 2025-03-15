@@ -1,0 +1,115 @@
+https://leetcode.com/problems/lru-cache/
+//code array based soln
+//improving search 
+//a.sorting
+//b.priority queue
+//c. hashmap
+//study priority queue and heap
+
+/**
+ * Your LRUCache object will be instantiated and called as such:
+ * LRUCache obj = new LRUCache(capacity);
+ * int param_1 = obj.get(key);
+ * obj.put(key,value);
+ */
+
+//using array
+class LRUCache {
+    class Pair {
+        int key;
+        int value;
+
+        public Pair(int key, int value) {
+            this.key = key;
+            this.value = value;
+        }
+    }
+
+    private Pair[] arr;
+    private int capacity;
+    private int size;
+
+    public LRUCache(int capacity) {
+        this.capacity = capacity;
+        this.arr = new Pair[capacity];
+        this.size = 0;
+    }
+
+    public int get(int key) {
+        int index = -1;
+        for (int i = 0; i < size; i++) {
+            if (arr[i].key == key) {
+                index = i;
+                break;
+            }
+        }
+        if (index == -1) return -1; 
+
+        
+        Pair temp = arr[index];
+        for (int i = index; i > 0; i--) {
+            arr[i] = arr[i - 1];
+        }
+        arr[0] = temp;
+
+        return temp.value;
+    }
+
+    public void put(int key, int value) {
+        // Check if the key already exists
+        for (int i = 0; i < size; i++) {
+            if (arr[i].key == key) {
+                arr[i].value = value;
+                // Move to front manually
+                Pair temp = arr[i];
+                for (int j = i; j > 0; j--) {
+                    arr[j] = arr[j - 1];
+                }
+                arr[0] = temp;
+                return;
+            }
+        }
+
+        // If cache is full, remove the least recently used element (last one)
+        if (size == capacity) {
+            size--; // Reduce size before shifting elements
+        }
+
+        // Shift elements to make space at the front
+        for (int i = size; i > 0; i--) {
+            arr[i] = arr[i - 1];
+        }
+
+        // Insert new key-value pair at the front
+        arr[0] = new Pair(key, value);
+        size++;
+    }
+
+    // Debugging Method to Print Cache
+    public void printCache() {
+        System.out.print("Cache: ");
+        for (int i = 0; i < size; i++) {
+            System.out.print("(" + arr[i].key + "," + arr[i].value + ") ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        LRUCache cache = new LRUCache(3);
+        cache.put(1, 100);
+        cache.put(2, 200);
+        cache.put(3, 300);
+        cache.printCache();  // [(3,300), (2,200), (1,100)]
+
+        cache.get(2);
+        cache.printCache();  // [(2,200), (3,300), (1,100)]
+
+        cache.put(4, 400);
+        cache.printCache();  // [(4,400), (2,200), (3,300)] -> LRU (1,100) removed
+
+        cache.get(1);
+        cache.printCache();  // No change as (1,100) was removed earlier
+    }
+}
+
+//Hashmap to reduce searching
