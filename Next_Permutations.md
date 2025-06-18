@@ -10,7 +10,7 @@ arr[2] = 5 > arr[3] = 3 ❌
 
 arr[1] = 2 < arr[2] = 5 ✅ (Found i = 1)
 
-**Step 2: Find the smallest number greater than arr[i]**
+**Step 2: Find the first smallest number greater than arr[i] from right**
 
 Find j such that arr[j] > arr[i]
 
